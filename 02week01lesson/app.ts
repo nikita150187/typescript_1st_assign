@@ -3,34 +3,45 @@ let count: number = 0;
 
 // Update the count display
 const updateCountDisplay = (): void => {
-    const countElement = document.getElementById('count') as HTMLElement;
+    //const countElement = document.getElementById('count') as HTMLElement;
+    const countElement = document.getElementById('count')
+
+    if (!countElement) {
+        console.error("Could not find countElement");
+        return;
+    }
     countElement.textContent = count.toString();
 };
 
 // Increment the count
-const increment = () => {
+const increment = (): void => {
     count += 1;
     updateCountDisplay();
 };
 
 // Decrement the count
-const decrement = () => {
+const decrement = (): void => {
     count -= 1;
     updateCountDisplay();
 };
 
 // Reset the count
-const reset = () => {
+const reset = (): void => {
     count = 0;
     updateCountDisplay();
 };
 
 // Attach event listeners to buttons
-const incrementButton = document.getElementById('increment-button') as HTMLButtonElement;
-const decrementButton = document.getElementById('decrement-button') as HTMLButtonElement;
-const resetButton = document.getElementById('reset-button') as HTMLButtonElement;
+const incrementButton = document.getElementById('increment-button');
+const decrementButton = document.getElementById('decrement-button');
+const resetButton = document.getElementById('reset-button');
 
-incrementButton.onclick = increment;
-decrementButton.onclick = decrement;
-resetButton.onclick = reset;
 
+if (incrementButton && decrementButton && resetButton) {
+  
+    incrementButton.onclick = increment;
+    decrementButton.onclick = decrement;
+    resetButton.onclick = reset;
+} else {
+    console.error('One or more buttons not found');
+}
